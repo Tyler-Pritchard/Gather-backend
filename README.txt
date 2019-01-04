@@ -1,1 +1,1 @@
-I'M  GOING TO BE MANIPULATING THE FILES LOCATED IN GATHER/BACKEND/THESTUFF/
+python app.py from the backend folder
