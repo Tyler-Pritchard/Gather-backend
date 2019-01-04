@@ -4,8 +4,10 @@ from flask_jwt import JWT
 
 from security import authenticate, identity
 # gain access to the users resource
-from user import UserRegister
-from item import Item, ItemList
+from resources.user import UserRegister
+from resources.item import Item, ItemList
+#from resources.cart import Cart
+#from resources.menu import Menu
 
 app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True
