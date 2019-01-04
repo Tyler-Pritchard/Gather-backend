@@ -1,0 +1,1 @@
+python app.py from the backend folder
