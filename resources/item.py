@@ -13,7 +13,7 @@ class Item(Resource):
                         help="This field cannot be left blank!"
                         )
 
-    # @jwt_required()
+    @jwt_required()
     def get(self, name):
         item = self.find_by_name(name)
         if item:
@@ -106,7 +106,8 @@ class Item(Resource):
 
 class ItemList(Resource):
     TABLE_NAME = 'items'
-
+    
+    @jwt_required()
     def get(self):
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
