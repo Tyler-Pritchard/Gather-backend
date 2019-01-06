@@ -18,7 +18,7 @@ class ItemModel(db.Model):
     @classmethod
     def find_by_name(cls, name):
         # SELECT * FROM items WHERE name=name, 1st row
-        return ItemModel.query.filter_by(name=name)
+        return ItemModel.query.filter_by(name=name).first()
 
     def save_to_db(self):
         db.session.add(self)
