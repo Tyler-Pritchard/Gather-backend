@@ -14,6 +14,7 @@ class ItemModel(db.Model):
     def __init__(self, name, price, store_id):
         self.name = name
         self.price = price
+        self.store_id = store_id
 
     def json(self):
         return {'name': self.name, 'price': self.price}
@@ -22,6 +23,8 @@ class ItemModel(db.Model):
     def find_by_name(cls, name):
         # SELECT * FROM items WHERE name=name, 1st row
         return ItemModel.query.filter_by(name=name).first()
+        # possible bug fix
+        # return cls.query.filter_by(name=name).first()
 
     def save_to_db(self):
         db.session.add(self)

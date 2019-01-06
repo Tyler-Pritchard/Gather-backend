@@ -11,7 +11,7 @@ class Item(Resource):
                         help="This field cannot be left blank!"
                         )
 
-    parser.add_argument('price',
+    parser.add_argument('store_id',
                         type=float,
                         required=True,
                         help="Every item needs a store id."
@@ -43,19 +43,18 @@ class Item(Resource):
         item = ItemModel.find_by_name(name)
         if item:
             item.delete_from_db()
-
-        return {'message': 'Item deleted'}
+            return {'message': 'Item deleted'}
+        return {'message': 'Item not found.'}, 404
 
     def put(self, name):
         data = Item.parser.parse_args()
 
         item = ItemModel.find_by_name(name)
 
-        if item is None:
-            item = ItemModel(name, **data)
-        else:
+        if item:
             item.price = data['price']
-            item.store_id = data['store_id']
+        else:
+            item = ItemModel(name, **data)
 
         item.save_to_db()
 

@@ -1,8 +1,5 @@
-# allows py to interact w/ sqlite3
-import sqlite3
 from flask_restful import Resource, reqparse
 from models.user import UserModel
-#from flask_jwt import jwt_required
 
 
 class UserRegister(Resource):
