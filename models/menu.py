@@ -1,8 +1,8 @@
 from db import db
 
 
-class StoreModel(db.Model):
-    __tablename__ = 'stores'
+class MenuModel(db.Model):
+    __tablename__ = 'menus'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
@@ -18,7 +18,7 @@ class StoreModel(db.Model):
     @classmethod
     def find_by_name(cls, name):
         # SELECT * FROM items WHERE name=name, 1st row
-        return StoreModel.query.filter_by(name=name).first()
+        return MenuModel.query.filter_by(name=name).first()
 
     def save_to_db(self):
         db.session.add(self)
