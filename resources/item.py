@@ -17,6 +17,18 @@ class Item(Resource):
                         help="Every item needs a menu id."
                         )
 
+    parser.add_argument('description',
+                        type=str,
+                        required=True,
+                        help="Every item needs a description."
+                        )
+
+    parser.add_argument('image_url',
+                        type=str,
+                        required=True,
+                        help="Every item needs an image."
+                        )
+
     @jwt_required()
     def get(self, name):
         item = ItemModel.find_by_name(name)
@@ -53,6 +65,11 @@ class Item(Resource):
 
         if item:
             item.price = data['price']
+            item.description = data['description']
+            item.addons = data['addons']
+            item.image_url = data['image_url']
+            item.menu_id = data['menu_id']
+
         else:
             item = ItemModel(name, **data)
 
