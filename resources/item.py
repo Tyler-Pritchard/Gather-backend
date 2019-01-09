@@ -11,10 +11,10 @@ class Item(Resource):
                         help="This field cannot be left blank!"
                         )
 
-    parser.add_argument('store_id',
+    parser.add_argument('menu_id',
                         type=float,
                         required=True,
-                        help="Every item needs a store id."
+                        help="Every item needs a menu id."
                         )
 
     @jwt_required()
