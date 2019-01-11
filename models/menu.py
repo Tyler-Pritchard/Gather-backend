@@ -7,7 +7,7 @@ class MenuModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
 
-    menus = db.relationship('MenuModel', lazy='dynamic')
+    items = db.relationship('MenuModel', lazy='dynamic')
 
     def __init__(self, name):
         self.name = name
