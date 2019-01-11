@@ -6,8 +6,8 @@ from flask_jwt import JWT
 from flask_cors import CORS
 from security import authenticate, identity
 from resources.user import UserRegister
-from resources.item import Item, ItemList
-from resources.menu import Menu, MenuList
+from resources.item import Item, ItemsList
+from resources.menu import Menu, MenusList
 from seeds.menu import menu
 from models.menu import MenuModel
 from seeds.item import item
@@ -35,8 +35,8 @@ jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Menu, '/menu/<string:name>')
 api.add_resource(Item, '/item/<string:name>')
-api.add_resource(ItemList, '/items')
-api.add_resource(MenuList, '/menus')
+api.add_resource(ItemsList, '/items')
+api.add_resource(MenusList, '/menus')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':

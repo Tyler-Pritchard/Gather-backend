@@ -13,11 +13,10 @@ class MenuModel(db.Model):
         self.name = name
 
     def json(self):
-        return {'name': self.name, 'items': [item.json() for item in self.items.all()]}
+        return {'name': self.name, 'menus': [menu.json() for menu in self.menus.all()]}
 
     @classmethod
     def find_by_name(cls, name):
-        # SELECT * FROM items WHERE name=name, 1st row
         return MenuModel.query.filter_by(name=name).first()
 
     def save_to_db(self):
