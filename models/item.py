@@ -9,7 +9,7 @@ class ItemModel(db.Model):
     price = db.Column(db.Float(precision=2))
     description = db.Column(db.String(500))
     image_url = db.Column(db.String(500))
-    menu_id = db.Column(db.Integer, db.ForeignKey('menus.id'))
+    menu_id = db.Column(db.Integer, db.ForeignKey('menu.id'))
     menu = db.relationship('MenuModel')
 
     def __init__(self, name, price, description, addons, image_url, menu_id):
@@ -24,10 +24,7 @@ class ItemModel(db.Model):
 
     @classmethod
     def find_by_name(cls, name):
-        # SELECT * FROM items WHERE name=name, 1st row
         return ItemModel.query.filter_by(name=name).first()
-        # possible bug fix
-        # return cls.query.filter_by(name=name).first()
 
     def save_to_db(self):
         db.session.add(self)

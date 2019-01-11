@@ -7,17 +7,16 @@ class MenuModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
 
-    items = db.relationship('ItemModel', lazy='dynamic')
+    menus = db.relationship('MenuModel', lazy='dynamic')
 
     def __init__(self, name):
         self.name = name
 
     def json(self):
-        return {'name': self.name, 'items': [item.json() for item in self.items.all()]}
+        return {'name': self.name, 'menus': [menu.json() for menu in self.menus.all()]}
 
     @classmethod
     def find_by_name(cls, name):
-        # SELECT * FROM items WHERE name=name, 1st row
         return MenuModel.query.filter_by(name=name).first()
 
     def save_to_db(self):
