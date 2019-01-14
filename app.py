@@ -12,6 +12,7 @@ from seeds.menu import menu
 from models.menu import MenuModel
 from seeds.item import item
 from models.item import ItemModel
+from models.orderItem import OrderItemModel
 
 app = Flask(__name__)
 CORS(app)

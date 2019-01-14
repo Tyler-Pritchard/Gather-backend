@@ -5,11 +5,13 @@ class ItemModel(db.Model):
     __tablename__ = 'items'
 
     id = db.Column(db.Integer, primary_key=True)
+    menu_id = db.Column(db.Integer, db.ForeignKey(
+        'menus.id', ondelete="SET NULL"))
     name = db.Column(db.String(80))
     price = db.Column(db.Float(precision=2))
     description = db.Column(db.String(500))
     image_url = db.Column(db.String(500))
-    menu_id = db.Column(db.Integer, db.ForeignKey('menus.id'))
+    orders = db.relationship('OrderItemModel', lazy="dynamic")
 
     def __init__(self, name, price, description, addons, image_url, menu_id):
         self.name = name
