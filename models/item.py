@@ -10,7 +10,6 @@ class ItemModel(db.Model):
     description = db.Column(db.String(500))
     image_url = db.Column(db.String(500))
     menu_id = db.Column(db.Integer, db.ForeignKey('menus.id'))
-    menu = db.relationship('MenuModel')
 
     def __init__(self, name, price, description, addons, image_url, menu_id):
         self.name = name
