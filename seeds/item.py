@@ -99,7 +99,7 @@ item = [
         "name": "PLT",
         "price": 1200,
         "description": "Garlic Portobello, Tomato Jam, Mixed Greens, on Toasted Wheat",
-        "image_url": 'https://unsplash.it/500/400?random',
+        "image_url": 'https://s3-us-west-1.amazonaws.com/gather-menu/plt.JPG',
         "menu_id": 2
     },
 
