@@ -1,6 +1,5 @@
 import os
 
-from db import db
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -42,5 +41,6 @@ api.add_resource(ItemsList, '/items')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':
+    from db import db
     db.init_app(app)
     app.run(port=5000, debug=True)
