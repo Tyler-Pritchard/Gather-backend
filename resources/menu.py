@@ -7,16 +7,10 @@ class Menu(Resource):
 
     parser = reqparse.RequestParser()
 
-    parser.add_argument('description',
+    parser.add_argument('name',
                         type=str,
                         required=True,
-                        help="Every menu needs a description."
-                        )
-
-    parser.add_argument('image_url',
-                        type=str,
-                        required=True,
-                        help="Every menu needs an image."
+                        help="Every menu needs a name."
                         )
 
     @jwt_required()
@@ -52,10 +46,7 @@ class Menu(Resource):
         menu = MenuModel.find_by_name(name)
 
         if menu:
-            menu.price = data['price']
-            menu.description = data['description']
-            menu.addons = data['addons']
-            menu.image_url = data['image_url']
+            menu.name = data['name']
             menu.menu_id = data['menu_id']
 
         else:

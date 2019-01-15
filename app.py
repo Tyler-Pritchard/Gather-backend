@@ -34,9 +34,9 @@ def create_tables():
 jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Menu, '/menu/<string:name>')
+api.add_resource(MenusList, '/menus')
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemsList, '/items')
-api.add_resource(MenusList, '/menus')
 api.add_resource(UserRegister, '/register')
 
 if __name__ == '__main__':
