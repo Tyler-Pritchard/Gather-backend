@@ -13,6 +13,15 @@ from models.menu import MenuModel
 from seeds.item import item
 from models.item import ItemModel
 from models.orderItem import OrderItemModel
+import stripe
+stripe.api_key = "sk_test_E8MBFdfr7DGN0cSwRtIMrSqr"
+
+charge = stripe.Charge.create(
+    amount=999,
+    currency='usd',
+    source='tok_visa',
+    receipt_email='jenny.rosen@example.com',
+)
 
 app = Flask(__name__)
 CORS(app)
