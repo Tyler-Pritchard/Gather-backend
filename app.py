@@ -25,12 +25,12 @@ app.secret_key = 'jose'
 api = Api(app)
 
 
-@app.before_first_request
-def create_tables():
-    db.drop_all()
-    db.create_all()
-    db.engine.execute(MenuModel.__table__.insert(), menu)
-    db.engine.execute(ItemModel.__table__.insert(), item)
+# @app.before_first_request
+# def create_tables():
+#     db.drop_all()
+#     db.create_all()
+#     db.engine.execute(MenuModel.__table__.insert(), menu)
+#     db.engine.execute(ItemModel.__table__.insert(), item)
 
 
 jwt = JWT(app, authenticate, identity)
