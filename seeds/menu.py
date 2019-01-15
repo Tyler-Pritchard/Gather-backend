@@ -1,28 +1,28 @@
 menu = [
 
     {
-        "name": "breakfast",
-        "menu_id": 1
+        "id": 1,
+        "name": "breakfast"
     },
 
     {
-        "name": "lunch",
-        "menu_id": 2
+        "id": 2,
+        "name": "lunch"
     },
 
     {
-        "name": "salads",
-        "menu_id": 3
+        "id": 3,
+        "name": "salads"
     },
 
     {
+        "id": 4,
         "name": "tacos",
-        "menu_id": 4
     },
 
     {
+        "id": 5,
         "name": "drinks",
-        "menu_id": 5
     }
 
 ]
