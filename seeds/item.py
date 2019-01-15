@@ -207,7 +207,7 @@ item = [
         "name": "Green Salad",
         "price": 1150,  # no price listed on menu; I priced it at 1150 to be consistent w/ taco salad
         "description": "Mixed Greens, Roasted Chicken, Cherry Tomato, Cucumber, Goat Cheese, Roasted",
-        "image_url": 'https://s3-us-west-1.amazonaws.com/gather-menu/classic_salad.png',
+        "image_url": 'https://unsplash.it/500/400?random',
         "menu_id": 3
     },
 
