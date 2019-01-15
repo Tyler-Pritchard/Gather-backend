@@ -74,7 +74,7 @@ item = [
         "name": "Veggie Sandwich (The Barbara)",
         "price": 1150,
         "description": "Cucumbers, Tomato Jam, Roasted Red Pepper Hummus, Mixed Greens on Toasted Wheat",
-        "image_url": 'https://s3-us-west-1.amazonaws.com/gather-menu/veggie_sandwich.jpg',
+        "image_url": 'https://s3-us-west-1.amazonaws.com/gather-menu/veggie_sandwich.JPG',
         "menu_id": 2
 
     },
