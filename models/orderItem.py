@@ -9,10 +9,12 @@ class OrderItemModel(db.Model):
         'items.id', ondelete="SET NULL"))
     name = db.Column(db.String(80))
     price = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
 
-    def __init__(self, name, price):
+    def __init__(self, name, price, quantity):
         self.name = name
         self.price = price
+        self.quantity = quantity
 
     def json(self):
         return {'name': self.name, 'price': self.price, 'orderItems': [orderItem.json() for orderItem in self.orderItems], 'quantity': self.quantity}
