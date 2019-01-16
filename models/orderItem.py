@@ -15,7 +15,7 @@ class OrderItemModel(db.Model):
         self.price = price
 
     def json(self):
-        return {'name': self.name, 'price': self.price, 'orderItems': [orderItem.json() for orderItem in self.orderItems]}
+        return {'name': self.name, 'price': self.price, 'orderItems': [orderItem.json() for orderItem in self.orderItems], 'quantity': self.quantity}
 
     @classmethod
     def find_by_name(cls, name):
