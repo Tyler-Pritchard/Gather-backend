@@ -13,6 +13,7 @@ from models.menu import MenuModel
 from seeds.item import item
 from models.item import ItemModel
 from models.orderItem import OrderItemModel
+from resources.stripe import StripeCharge
 
 app = Flask(__name__)
 CORS(app)
@@ -39,6 +40,8 @@ api.add_resource(MenusList, '/menus')
 api.add_resource(Item, '/item/<string:name>')
 api.add_resource(ItemsList, '/items')
 api.add_resource(UserRegister, '/register')
+api.add_resource(StripeCharge, '/stripeCharge')
+
 
 if __name__ == '__main__':
     from db import db

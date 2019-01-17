@@ -17,6 +17,11 @@ class OrderItem(Resource):
                         required=True,
                         help="Every item needs a price."
                         )
+    parser.add_argument('quantity',
+                        type=int,
+                        required=True,
+                        help="Quantity cannot be less than 1."
+                        )
 
     @jwt_required()
     # change functions to increase value of "quantity" instead of throwing an error
@@ -28,6 +33,7 @@ class OrderItem(Resource):
 
     def post(self, name, price):
         if OrderItemModel.find_by_name(name):
+            # switch to quantity ++
             return {'message': "An item with name '{}' already exists.".format(name)}, 400
 
         data = OrderItem.parser.parse_args()
