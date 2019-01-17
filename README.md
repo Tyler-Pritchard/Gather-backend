@@ -1,18 +1,18 @@
-# Project Title
+# Gather Cafe - Backend API
 
-Hello and welcome to Gather Cafe! This application is intended to order food and beverages specifically from the Gather Cafe located in the Galvanize building at 44 Tehama St in San Francisco, CA. It will display menus, generate orders and place the orders with Gather Cafe. Gather staff will then notify the user when the order has been processed and completed.
+Hello and welcome to Gather Cafe! This is the backend repository for a RESTful API intended to order food and beverages specifically from the Gather Cafe located in the Galvanize building at 44 Tehama Street in San Francisco, CA. It will display menus, generate orders, process payments, and place the orders with Gather Cafe. Cafe staff will then notify the user when the order has been processed and completed.
 
 ## Getting Started
 
 IN APP.PY FILE, CHANGE THE USER NAME TO YOUR USER NAME, I.E.:
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-'DATABASE_URL', 'postgresql://Tyler:postgres@localhost/gather_python')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    'DATABASE_URL', 'postgresql://Tyler:postgres@localhost/gather_python')
 
-    TO
+TO
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-'DATABASE_URL', 'postgresql://YOUR_USER_NAME:postgres@localhost/gather_python')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
+    'DATABASE_URL', 'postgresql://YOUR_USER_NAME:postgres@localhost/gather_python')
 
 ### Prerequisites
 
@@ -42,55 +42,67 @@ pip install stripe
 python app.python from the command line in the folder's root directory
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
 ## Running the tests
 
-<img src ="https://s3.amazonaws.com/gather-screenshots/PM_auth_user.png" alt="auth" height=800px width=800px />
+User creation in PostMan
+<img src ="https://s3.amazonaws.com/gather-screenshots/PM_create_user.png" alt="create user" height=400px width=600px />
 
-### Break down into end to end tests
+User authentication in PostMan
+<img src ="https://s3.amazonaws.com/gather-screenshots/PM_auth_user.png" alt="generate token" height=400px width=600px />
+
+Successful get request in PostMan
+<img src ="https://s3.amazonaws.com/gather-screenshots/PM_get.png" alt="Get" height=400px width=600px />
+
+Successful deployment to Netlify
+<img src ="https://s3.amazonaws.com/gather-screenshots/netlify_overview.png" alt="get" height=400px width=600px />
+
+Interfacing with Stripe for payment authorization
+<img src ="https://s3.amazonaws.com/gather-screenshots/stripe_auth.png" alt="conf" height=400px width=600px />
+
+Successful Stripe tests
+<img src ="https://s3.amazonaws.com/gather-screenshots/stripe_acct.png" alt="conf" height=400px width=600px />
+
+<!-- ### And coding style tests
 
 Explain what these tests test and why
 
 ```
 Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
+``` -->
+<!--
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Add additional notes about how to deploy this on a live system -->
 
 ## Built With
 
-- [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-- [Maven](https://maven.apache.org/) - Dependency Management
-- [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+(\*) = New tech learned during development
 
-## Contributing
+- [Python](https://www.python.org/) - The programming language used(\*)
+- [Flask](http://flask.pocoo.org/) - Python microframework(\*)
+- [SQLAlchemy](https://www.sqlalchemy.org/) - Python SQL toolkit(\*)
+- [PostgreSQL](https://www.postgresql.org/)-Database
+- [Netlify](https://www.netlify.com/) - Server(\*)
+- [Stripe](https://stripe.com/) - Online payment processing(\*)
+- [Twilio](https://www.twilio.com/) - Communications API(\*)
+
+<!-- ## Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). -->
 
-## Authors
+## Author
 
-- **Billie Thompson** - _Initial work_ - [PurpleBooth](https://github.com/PurpleBooth)
+- **Tyler Pritchard** - _Initial work_ - [website](https://tylerrobertpritchard.com)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
-## License
+<!-- ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details -->
 
 ## Acknowledgments
 
