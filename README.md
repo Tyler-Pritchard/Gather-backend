@@ -1,6 +1,6 @@
 # Project Title
 
-Hello and welcome to Gather Cafe! This application is intended to order food and beverages specifically from the Gather Cafe located in the Galvanize building at 44 Tehama St in San Francisco, CA.
+Hello and welcome to Gather Cafe! This application is intended to order food and beverages specifically from the Gather Cafe located in the Galvanize building at 44 Tehama St in San Francisco, CA. It will display menus, generate orders and place the orders with Gather Cafe. Gather staff will then notify the user when the order has been processed and completed.
 
 ## Getting Started
 
@@ -16,34 +16,37 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+You'll need to install:
 
-```
-Give examples
-```
+    -Python (Minimum )
+    -Flask
+    -Flask-JWT
+    -Flask-RESTful
+    -Flask-SQLAlchemy
+    -flask-cors
+    -uwsgi
+    -psycopg2
+    -bcrypt
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
 ```
 pip install Flask
-python app.python
 ```
 
-And repeat
+```
+pip install stripe
+```
 
 ```
-until finished
+python app.python from the command line in the folder's root directory
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+<img src ="https://s3.amazonaws.com/gather-screenshots/PM_auth_user.png" alt="auth" height=800px width=800px />
 
 ### Break down into end to end tests
 
@@ -91,6 +94,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+- Mansoor Baharamand, Lead Instructor
+- Carl Corsini, Assistant Instructor
+- Jack Chi, Consultant
+- Evin Sellin, Consultant
