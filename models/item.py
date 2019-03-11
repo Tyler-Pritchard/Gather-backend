@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 from db import db
 
 
@@ -13,24 +15,28 @@ class ItemModel(db.Model):
     image_url = db.Column(db.String(500))
     orders = db.relationship('OrderItemModel', lazy="dynamic")
 
-    def __init__(self, name, price, description, addons, image_url, menu_id):
+    def __init__(self, name: str, price: float, description: str, addons,  image_url: str, menu_id: int):
         self.name = name
         self.price = price
         self.description = description
         self.image_url = image_url
         self.menu_id = menu_id
 
-    def json(self):
+    def json(self) -> Dict:
         return {'name': self.name, 'price': self.price, 'description': self.description, 'image_url': self.image_url, 'menu_id': self.menu_id}
 
+    # @classmethod
+    # def find_all(cls) -> List:
+    #     return cls.query.all()
+
     @classmethod
-    def find_by_name(cls, name):
+    def find_by_name(cls, name: str):
         return ItemModel.query.filter_by(name=name).first()
 
-    def save_to_db(self):
+    def save_to_db(self) -> None:
         db.session.add(self)
         db.session.commit()
 
-    def delete_from_db(self):
+    def delete_from_db(self) -> None:
         db.session.delete(self)
         db.session.commit()
