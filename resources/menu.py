@@ -14,13 +14,13 @@ class Menu(Resource):
                         )
 
     @jwt_required()
-    def get(self, name):
+    def get(self, name: str):
         menu = MenuModel.find_by_name(name)
         if menu:
             return menu.json()
         return {'message': 'Menu not found'}, 404
 
-    def post(self, name):
+    def post(self, name: str):
         if MenuModel.find_by_name(name):
             return {'message': "A menu with name '{}' already exists.".format(name)}, 400
 
@@ -33,14 +33,14 @@ class Menu(Resource):
 
         return menu.json(), 201
 
-    def delete(self, name):
+    def delete(self, name: str):
         menu = MenuModel.find_by_name(name)
         if menu:
             menu.delete_from_db()
             return {'message': 'Menu deleted'}
         return {'message': 'Menu not found.'}, 404
 
-    def put(self, name):
+    def put(self, name: str):
         data = Menu.parser.parse_args()
 
         menu = MenuModel.find_by_name(name)
