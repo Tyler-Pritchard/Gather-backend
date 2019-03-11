@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 from db import db
 
 
@@ -16,7 +18,7 @@ class OrderItemModel(db.Model):
         self.price = price
         self.quantity = quantity
 
-    def json(self):
+    def json(self) -> Dict:
         return {'name': self.name, 'price': self.price, 'orderItems': [orderItem.json() for orderItem in self.orderItems], 'quantity': self.quantity}
 
     # @classmethod
