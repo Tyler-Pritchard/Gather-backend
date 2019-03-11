@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict
 
 from db import db
 
@@ -24,6 +24,10 @@ class ItemModel(db.Model):
 
     def json(self) -> Dict:
         return {'name': self.name, 'price': self.price, 'description': self.description, 'image_url': self.image_url, 'menu_id': self.menu_id}
+
+    # @classmethod
+    # def find_all(cls) -> List:
+    #     return cls.query.all()
 
     @classmethod
     def find_by_name(cls, name: str):

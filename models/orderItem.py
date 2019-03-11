@@ -1,5 +1,3 @@
-from typing import Dict, List
-
 from db import db
 
 
@@ -20,6 +18,10 @@ class OrderItemModel(db.Model):
 
     def json(self):
         return {'name': self.name, 'price': self.price, 'orderItems': [orderItem.json() for orderItem in self.orderItems], 'quantity': self.quantity}
+
+    # @classmethod
+    # def find_all(cls) -> List:
+    #     return cls.query.all()
 
     @classmethod
     def find_by_name(cls, name: str):
