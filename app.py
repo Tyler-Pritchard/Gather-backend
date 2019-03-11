@@ -8,9 +8,9 @@ from security import authenticate, identity
 from resources.user import UserRegister
 from resources.item import Item, ItemsList
 from resources.menu import Menu, MenusList
-from seeds.menu import menu
+# from seeds.menu import menu
 from models.menu import MenuModel
-from seeds.item import item
+# from seeds.item import item
 from models.item import ItemModel
 from models.orderItem import OrderItemModel
 from resources.stripe import StripeCharge
