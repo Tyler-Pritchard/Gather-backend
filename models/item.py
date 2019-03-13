@@ -1,6 +1,9 @@
-from typing import Dict, List
+from typing import Dict, List, Union
 
 from db import db
+
+
+menu_item = Dict[str, Union[int, str, float]]
 
 
 class ItemModel(db.Model):
@@ -12,6 +15,7 @@ class ItemModel(db.Model):
     name = db.Column(db.String(80))
     price = db.Column(db.Float(precision=2))
     description = db.Column(db.String(500))
+    # TODO Check file reference re: image_url bug
     image_url = db.Column(db.String(500))
     orders = db.relationship('OrderItemModel', lazy="dynamic")
 
@@ -22,7 +26,7 @@ class ItemModel(db.Model):
         self.image_url = image_url
         self.menu_id = menu_id
 
-    def json(self) -> Dict:
+    def json(self) -> menu_item:
         return {'name': self.name, 'price': self.price, 'description': self.description, 'image_url': self.image_url, 'menu_id': self.menu_id}
 
     # @classmethod
