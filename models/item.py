@@ -30,11 +30,11 @@ class ItemModel(db.Model):
         return {'name': self.name, 'price': self.price, 'description': self.description, 'image_url': self.image_url, 'menu_id': self.menu_id}
 
     # @classmethod
-    # def find_all(cls) -> List:
+    # def find_all(cls) -> List["ItemModel"]:
     #     return cls.query.all()
 
     @classmethod
-    def find_by_name(cls, name: str):
+    def find_by_name(cls, name: str) -> "ItemModel":
         return ItemModel.query.filter_by(name=name).first()
 
     def save_to_db(self) -> None:
