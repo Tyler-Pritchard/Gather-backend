@@ -21,11 +21,11 @@ class MenuModel(db.Model):
         return {'name': self.name, 'items': [menu.json() for menu in self.items]}
 
     # @classmethod
-    # def find_all(cls) -> List:
+    # def find_all(cls) -> List["MenuModel"]:
     #     return cls.query.all()
 
     @classmethod
-    def find_by_name(cls, name: str):
+    def find_by_name(cls, name: str) -> "MenuModel":
         return MenuModel.query.filter_by(name=name).first()
 
     def save_to_db(self) -> None:
