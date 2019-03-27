@@ -4,31 +4,38 @@ from models.item import ItemModel
 from flask import request
 import stripe
 
+BLANK_ERROR = "'{}' cannot be blank."
+ITEM_NOT_FOUND = "Item not found."
+ITEM_ALREADY_EXISTS = "An item with name '{}' already exists."
+INSERT_ITEM_ERROR = "An error occurred inserting the item."
+ITEM_DELETED = "Item deleted."
+ITEM_NOT_FOUND = "Item not found."
+
 
 class Item(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('price',
                         type=float,
                         required=True,
-                        help="This field cannot be left blank!"
+                        help=BLANK_ERROR
                         )
 
     parser.add_argument('menu_id',
                         type=float,
                         required=True,
-                        help="Every item needs a menu id."
+                        help=BLANK_ERROR
                         )
 
     parser.add_argument('description',
                         type=str,
                         required=True,
-                        help="Every item needs a description."
+                        help=BLANK_ERROR
                         )
 
     parser.add_argument('image_url',
                         type=str,
                         required=True,
-                        help="Every item needs an image."
+                        help=BLANK_ERROR
                         )
 
     @jwt_required()
@@ -36,11 +43,11 @@ class Item(Resource):
         item = ItemModel.find_by_name(name)
         if item:
             return item.json()
-        return {'message': 'Item not found'}, 404
+        return {'message': ITEM_NOT_FOUND}, 404
 
     def post(self, name: str):
         if ItemModel.find_by_name(name):
-            return {'message': "An item with name '{}' already exists.".format(name)}, 400
+            return {'message': ITEM_ALREADY_EXISTS.format(name)}, 400
 
         data = Item.parser.parse_args()
 
@@ -49,7 +56,7 @@ class Item(Resource):
         try:
             item.save_to_db()
         except:
-            return {"message": "An error occurred inserting the item"}
+            return {"message": INSERT_ITEM_ERROR}
 
         return item.json(), 201
 
@@ -57,8 +64,8 @@ class Item(Resource):
         item = ItemModel.find_by_name(name)
         if item:
             item.delete_from_db()
-            return {'message': 'Item deleted'}
-        return {'message': 'Item not found.'}, 404
+            return {'message': ITEM_DELETED}
+        return {'message': ITEM_NOT_FOUND}, 404
 
     def put(self, name: str):
         data = Item.parser.parse_args()
