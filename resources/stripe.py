@@ -8,9 +8,9 @@ BLANK_ERROR = "'{}' cannot be blank."
 class StripeCharge(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('amount', type=int, required=True,
-                        help="'{}' cannot be blank.")
+                        help=BLANK_ERROR)
     parser.add_argument('token', type=str, required=True,
-                        help="'{}' cannot be blank.")
+                        help=BLANK_ERROR)
 
     def post(self):
         data = StripeCharge.parser.parse_args()
