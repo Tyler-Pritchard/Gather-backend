@@ -2,6 +2,14 @@ from flask_restful import Resource, reqparse
 from flask_jwt import jwt_required
 from models.orderItem import OrderItemModel
 
+BLANK_ERROR = "'{}' cannot be blank."
+QUANTITY_ERROR = "Quantity cannot be less than 1."
+ITEM_NOT_FOUND = "Item not found."
+ITEM_ALREADY_EXISTS = "An item with name '{}' already exists."
+CREATE_ITEM_ERROR = "An error occurred while creating the item."
+ORDERITEM_DELETED = "'{}' deleted."
+ORDERITEM_NOT_FOUND = "OrderItem not found."
+
 
 class OrderItem(Resource):
 
@@ -10,17 +18,17 @@ class OrderItem(Resource):
     parser.add_argument('name',
                         type=str,
                         required=True,
-                        help="Every item needs a name."
+                        help=BLANK_ERROR
                         )
     parser.add_argument('price',
                         type=int,
                         required=True,
-                        help="Every item needs a price."
+                        help=BLANK_ERROR
                         )
     parser.add_argument('quantity',
                         type=int,
                         required=True,
-                        help="Quantity cannot be less than 1."
+                        help=QUANTITY_ERROR
                         )
 
     @jwt_required()
@@ -29,19 +37,19 @@ class OrderItem(Resource):
         orderItem = OrderItemModel.find_by_name(name)
         if orderItem:
             return orderItem.json()
-        return {'message': 'Item not found'}, 404
+        return {'message': ITEM_NOT_FOUND}, 404
 
     def post(self, name: str, price: float):
         if OrderItemModel.find_by_name(name):
             # switch to quantity ++
-            return {'message': "An item with name '{}' already exists.".format(name)}, 400
+            return {'message': ITEM_ALREADY_EXISTS.format(name)}, 400
 
         data = OrderItem.parser.parse_args()
         orderItem = OrderItemModel(name, price)
         try:
             orderItem.save_to_db()
         except:
-            return {'message': 'An error occurred while creating the item.'}, 500
+            return {'message': CREATE_ITEM_ERROR}, 500
 
         return orderItem.json(), 201
 
@@ -49,8 +57,8 @@ class OrderItem(Resource):
         orderItem = OrderItemModel.find_by_name(name)
         if orderItem:
             orderItem.delete_from_db()
-            return {'message': 'OrderItem deleted'}
-        return {'message': 'OrderItem not found.'}, 404
+            return {'message': ORDERITEM_DELETED}
+        return {'message': ORDERITEM_NOT_FOUND}, 404
 
     def put(self, name: str):
         data = OrderItem.parser.parse_args()
