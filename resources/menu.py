@@ -2,6 +2,12 @@ from flask_restful import Resource, reqparse
 from flask_jwt import jwt_required
 from models.menu import MenuModel
 
+BLANK_ERROR = "'{}' cannot be blank."
+MENU_NOT_FOUND = "Menu not found."
+MENU_ALREADY_EXISTS = "A menu with name '{}' already exists."
+CREATE_MENU_ERROR = "An error occurred while creating the menu."
+MENU_DELETED = 'Menu deleted.'
+
 
 class Menu(Resource):
 
@@ -10,7 +16,7 @@ class Menu(Resource):
     parser.add_argument('name',
                         type=str,
                         required=True,
-                        help="Every menu needs a name."
+                        help=BLANK_ERROR
                         )
 
     @jwt_required()
@@ -18,18 +24,18 @@ class Menu(Resource):
         menu = MenuModel.find_by_name(name)
         if menu:
             return menu.json()
-        return {'message': 'Menu not found'}, 404
+        return {'message': MENU_NOT_FOUND}, 404
 
     def post(self, name: str):
         if MenuModel.find_by_name(name):
-            return {'message': "A menu with name '{}' already exists.".format(name)}, 400
+            return {'message': MENU_ALREADY_EXISTS.format(name)}, 400
 
         data = Menu.parser.parse_args()
         menu = MenuModel(name)
         try:
             menu.save_to_db()
         except:
-            return {'message': 'An error occurred while creating the menu.'}, 500
+            return {'message': CREATE_MENU_ERROR}, 500
 
         return menu.json(), 201
 
@@ -37,8 +43,8 @@ class Menu(Resource):
         menu = MenuModel.find_by_name(name)
         if menu:
             menu.delete_from_db()
-            return {'message': 'Menu deleted'}
-        return {'message': 'Menu not found.'}, 404
+            return {'message': MENU_DELETED}
+        return {'message': MENU_NOT_FOUND}, 404
 
     def put(self, name: str):
         data = Menu.parser.parse_args()

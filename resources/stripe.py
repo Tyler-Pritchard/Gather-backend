@@ -2,13 +2,15 @@ from flask_restful import Resource, reqparse
 from flask import request
 import stripe
 
+BLANK_ERROR = "'{}' cannot be blank."
+
 
 class StripeCharge(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('amount', type=int, required=True,
-                        help="This field cannot be blank.")
+                        help=BLANK_ERROR)
     parser.add_argument('token', type=str, required=True,
-                        help="This field cannot be blank.")
+                        help=BLANK_ERROR)
 
     def post(self):
         data = StripeCharge.parser.parse_args()
