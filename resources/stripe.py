@@ -12,7 +12,8 @@ class StripeCharge(Resource):
     parser.add_argument('token', type=str, required=True,
                         help=BLANK_ERROR)
 
-    def post(self):
+    @classmethod
+    def post(cls):
         data = StripeCharge.parser.parse_args()
 
         stripe.api_key = "sk_test_E8MBFdfr7DGN0cSwRtIMrSqr"
