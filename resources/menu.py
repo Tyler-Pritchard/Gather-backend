@@ -19,14 +19,16 @@ class Menu(Resource):
                         help=BLANK_ERROR
                         )
 
+    @classmethod
     @jwt_required()
-    def get(self, name: str):
+    def get(cls, name: str):
         menu = MenuModel.find_by_name(name)
         if menu:
             return menu.json()
         return {'message': MENU_NOT_FOUND}, 404
 
-    def post(self, name: str):
+    @classmethod
+    def post(cls, name: str):
         if MenuModel.find_by_name(name):
             return {'message': MENU_ALREADY_EXISTS.format(name)}, 400
 
@@ -39,14 +41,16 @@ class Menu(Resource):
 
         return menu.json(), 201
 
-    def delete(self, name: str):
+    @classmethod
+    def delete(cls, name: str):
         menu = MenuModel.find_by_name(name)
         if menu:
             menu.delete_from_db()
             return {'message': MENU_DELETED}
         return {'message': MENU_NOT_FOUND}, 404
 
-    def put(self, name: str):
+    @classmethod
+    def put(cls, name: str):
         data = Menu.parser.parse_args()
 
         menu = MenuModel.find_by_name(name)
@@ -64,5 +68,6 @@ class Menu(Resource):
 
 
 class MenusList(Resource):
-    def get(self):
+    @classmethod
+    def get(cls):
         return {'menus': [menu.json() for menu in MenuModel.query.all()]}
