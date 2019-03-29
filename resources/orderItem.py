@@ -31,15 +31,17 @@ class OrderItem(Resource):
                         help=QUANTITY_ERROR
                         )
 
+    @classmethod
     @jwt_required()
     # TODO change functions to increase value of "quantity" instead of throwing an error
-    def get(self, name: str):
+    def get(cls, name: str):
         orderItem = OrderItemModel.find_by_name(name)
         if orderItem:
             return orderItem.json()
         return {'message': ITEM_NOT_FOUND}, 404
 
-    def post(self, name: str, price: float):
+    @classmethod
+    def post(cls, name: str, price: float):
         if OrderItemModel.find_by_name(name):
             # switch to quantity ++
             return {'message': ITEM_ALREADY_EXISTS.format(name)}, 400
@@ -53,14 +55,16 @@ class OrderItem(Resource):
 
         return orderItem.json(), 201
 
-    def delete(self, name: str):
+    @classmethod
+    def delete(cls, name: str):
         orderItem = OrderItemModel.find_by_name(name)
         if orderItem:
             orderItem.delete_from_db()
             return {'message': ORDERITEM_DELETED}
         return {'message': ORDERITEM_NOT_FOUND}, 404
 
-    def put(self, name: str):
+    @classmethod
+    def put(cls, name: str):
         data = OrderItem.parser.parse_args()
 
         orderItem = OrderItemModel.find_by_name(name)
@@ -79,5 +83,6 @@ class OrderItem(Resource):
 
 
 class OrderItemsList(Resource):
-    def get(self):
+    @classmethod
+    def get(cls):
         return {'orderItems': [OrderItem.json() for OrderItem in OrderItemModel.query.all()]}
