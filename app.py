@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt import JWT
 from flask_cors import CORS
@@ -8,9 +8,9 @@ from security import authenticate, identity
 from resources.user import UserRegister
 from resources.item import Item, ItemsList
 from resources.menu import Menu, MenusList
-# from seeds.menu import menu
+from seeds.menu import menu
 from models.menu import MenuModel
-# from seeds.item import item
+from seeds.item import item
 from models.item import ItemModel
 from models.orderItem import OrderItemModel
 from resources.stripe import StripeCharge
@@ -25,14 +25,15 @@ app.secret_key = 'jose'
 api = Api(app)
 
 
-# @app.before_first_request
-# def create_tables():
-#     db.drop_all()
-#     db.create_all()
-#     db.engine.execute(MenuModel.__table__.insert(), menu)
-#     db.engine.execute(ItemModel.__table__.insert(), item)
+@app.before_first_request
+def create_tables():
+    db.drop_all()
+    db.create_all()
+    db.engine.execute(MenuModel.__table__.insert(), menu)
+    db.engine.execute(ItemModel.__table__.insert(), item)
 
 
+# TODO: https://blog.tecladocode.com/learn-python-advanced-configuration-of-flask-jwt/
 jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Menu, '/menu/<string:name>')
