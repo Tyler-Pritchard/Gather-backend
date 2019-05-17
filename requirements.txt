@@ -6,3 +6,6 @@ flask-cors
 uwsgi
 psycopg2
 bcrypt
+alembic
+Flask-Migrate
+Flask-Script
