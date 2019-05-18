@@ -17,6 +17,9 @@ from resources.stripe import StripeCharge
 
 app = Flask(__name__)
 CORS(app)
+
+app.config['DEBUG'] = True
+
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     'DATABASE_URL', 'postgresql://Tyler:postgres@localhost/gather_python')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -39,4 +42,10 @@ api.add_resource(StripeCharge, '/stripeCharge')
 if __name__ == '__main__':
     from db import db
     db.init_app(app)
+
+    if app.config['DEBUG']:
+        @app.before_first_request
+        def create_tables():
+            db.create_all()
+
     app.run(port=5000, debug=True)
