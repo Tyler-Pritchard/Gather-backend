@@ -173,7 +173,7 @@
 				}],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"jose\",\n\t\"password\": \"asdf\"\n}"
+					"raw": "{\n\t\"username\": \"tyler\",\n\t\"password\": \"myPassword\"\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/auth",
@@ -204,7 +204,7 @@
 				}],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"jose\",\n\t\"password\": \"asdf\"\n}"
+					"raw": "{\n\t\"username\": \"tyler\",\n\t\"password\": \"myPassword\"\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/register",
