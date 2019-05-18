@@ -25,14 +25,6 @@ app.secret_key = 'tyler'
 api = Api(app)
 
 
-@app.before_first_request
-def create_tables():
-    db.drop_all()
-    db.create_all()
-    db.engine.execute(MenuModel.__table__.insert(), menu)
-    db.engine.execute(ItemModel.__table__.insert(), item)
-
-
 # TODO: https://blog.tecladocode.com/learn-python-advanced-configuration-of-flask-jwt/
 jwt = JWT(app, authenticate, identity)
 
