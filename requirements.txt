@@ -7,5 +7,6 @@ uwsgi
 psycopg2
 bcrypt
 alembic
+security
 Flask-Migrate
 Flask-Script
