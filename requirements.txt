@@ -9,4 +9,3 @@ bcrypt
 alembic
 Flask-Migrate
 Flask-Script
-werkzeug.security
