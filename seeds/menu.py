@@ -3,37 +3,37 @@ menu = [
     {
         "id": 1,
         "name": "breakfast",
-        "url": "/Menus/breakfast"
+        "url": "/breakfast"
     },
 
     {
         "id": 2,
         "name": "lunch",
-        "url": "/Menus/lunch"
+        "url": "/lunch"
     },
 
     {
         "id": 3,
         "name": "salads",
-        "url": "/Menus/salads"
+        "url": "/salads"
     },
 
     {
         "id": 4,
         "name": "tacos",
-        "url": "/Menus/tacos"
+        "url": "/tacos"
     },
 
     {
         "id": 5,
         "name": "drinks",
-        "url": "/Menus/drinks"
+        "url": "/drinks"
     },
 
     {
         "id": 6,
         "name": "catering",
-        "url": "/Menus/catering"
+        "url": "/catering"
     }
 
 ]
