@@ -32,7 +32,7 @@ menu = [
     {
         "id": 6,
         "name": "catering",
-        "url": "/Menus/catering"
+        "url": "/Menus/catering",
     }
 
 ]
