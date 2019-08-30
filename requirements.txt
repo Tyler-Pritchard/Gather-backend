@@ -1,4 +1,4 @@
-Flask
+Flask>=0.12
 Flask-JWT
 Flask-RESTful
 Flask-SQLAlchemy
@@ -10,3 +10,4 @@ alembic
 stripe
 Flask-Migrate
 Flask-Script
+twilio~=6.0.0
