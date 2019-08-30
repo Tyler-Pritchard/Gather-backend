@@ -27,6 +27,7 @@ You'll need to install:
     -uwsgi
     -psycopg2
     -bcrypt
+    -twilio~=6.0.0
 
 ### Installing
 
