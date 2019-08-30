@@ -15,7 +15,6 @@ class ItemModel(db.Model):
     name = db.Column(db.String(80))
     price = db.Column(db.Float(precision=2))
     description = db.Column(db.String(500))
-    # TODO Check file reference re: image_url bug
     image_url = db.Column(db.String(500))
     orders = db.relationship('OrderItemModel', lazy="dynamic")
 
@@ -29,9 +28,9 @@ class ItemModel(db.Model):
     def json(self) -> menu_item:
         return {'name': self.name, 'price': self.price, 'description': self.description, 'image_url': self.image_url, 'menu_id': self.menu_id}
 
-    # @classmethod
-    # def find_all(cls) -> List["ItemModel"]:
-    #     return cls.query.all()
+    @classmethod
+    def find_all(cls) -> List["ItemModel"]:
+        return cls.query.all()
 
     @classmethod
     def find_by_name(cls, name: str) -> "ItemModel":
