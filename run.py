@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 
 @app.route("/sms")
-def hello():
+def order_in():
     # TODO REPLACE TEXT W/ VARS
     return "Incoming order __OrderNumber__ for __OrderItems__"
 
