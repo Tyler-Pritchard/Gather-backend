@@ -18,3 +18,5 @@ venv.bak/
 .vscode/*
 
 requirements
+
+gatherEC2.pem
