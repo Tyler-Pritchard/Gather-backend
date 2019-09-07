@@ -2,9 +2,8 @@ import os
 
 from flask import Flask, jsonify
 from flask_restful import Api
-from flask_jwt_extended import JWT
+from flask_jwt_extended import JWTManager
 from flask_cors import CORS
-from security import authenticate, identity
 from resources.user import UserRegister, User
 from resources.item import Item, ItemsList
 from resources.menu import Menu, MenusList
@@ -29,7 +28,7 @@ api = Api(app)
 
 
 # TODO: https://blog.tecladocode.com/learn-python-advanced-configuration-of-flask-jwt/
-jwt = JWT(app, authenticate, identity)
+jwt = JWTManager(app)
 
 api.add_resource(Menu, '/menu/<string:name>')
 api.add_resource(MenusList, '/menus')
