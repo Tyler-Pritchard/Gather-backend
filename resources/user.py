@@ -5,18 +5,20 @@ BLANK_ERROR = "'{}' cannot be blank."
 USER_ALREADY_EXISTS = "A user with that username already exists."
 USER_CREATED_SUCCESSFULLY = "User created successfully."
 
+_user_parser = reqparse.RequestParser()
+_user_parser.add_argument('username',
+                          type=str, required=True,
+                          help=BLANK_ERROR
+                          )
+_user_parser.add_argument('password',
+                          type=str, required=True,
+                          help=BLANK_ERROR)
+
 
 class UserRegister(Resource):
-
-    parser = reqparse.RequestParser()
-    parser.add_argument('username', type=str, required=True,
-                        help=BLANK_ERROR)
-    parser.add_argument('password', type=str, required=True,
-                        help=BLANK_ERROR)
-
     @classmethod
     def post(cls):
-        data = UserRegister.parser.parse_args()
+        data = _user_parser.parse_args()
 
         if UserModel.find_by_username(data['username']):
             return {"message": USER_ALREADY_EXISTS}, 400
@@ -45,15 +47,9 @@ class User(Resource):
 
 
 class UserLogin(Resource):
-    parser = reqparse.RequestParser()
-    parser.add_argument('username', type=str, required=True,
-                        help=BLANK_ERROR)
-    parser.add_argument('password', type=str, required=True,
-                        help=BLANK_ERROR)
-
     @classmethod
     def post(cls):
-        data = cls.parser.parse_args()
+        data = _user_parser.parse_args()
 
         user = UserModel.find_by_username(data['username'])
 
