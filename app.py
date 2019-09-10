@@ -4,7 +4,7 @@ from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
-from resources.user import UserRegister, User
+from resources.user import UserRegister, User, UserLogin
 from resources.item import Item, ItemsList
 from resources.menu import Menu, MenusList
 from seeds.menu import menu
@@ -23,6 +23,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     'DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
+# TODO: .env/.ini file for passwords. app.config['JWT_SECRET_KEY']
 app.secret_key = 'tyler'
 api = Api(app)
 
@@ -37,7 +38,7 @@ api.add_resource(ItemsList, '/items')
 api.add_resource(UserRegister, '/register')
 api.add_resource(StripeCharge, '/stripeCharge')
 api.add_resource(User, '/user/<int:user_id>')
-
+api.add_resource(UserLogin, '/login')
 
 if __name__ == '__main__':
     from db import db

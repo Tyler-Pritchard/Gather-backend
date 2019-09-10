@@ -1,5 +1,5 @@
 Flask>=0.12
-Flask-JWT
+Flask-JWT-Extended
 Flask-RESTful
 Flask-SQLAlchemy
 flask-cors
