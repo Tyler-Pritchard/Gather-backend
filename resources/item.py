@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from flask_jwt import JWT, jwt_required
+from flask_jwt_extended import jwt_required
 from models.item import ItemModel
 from flask import request
 import stripe
@@ -39,7 +39,7 @@ class Item(Resource):
                         )
 
     @classmethod
-    @jwt_required()
+    @jwt_required
     def get(cls, name: str):
         item = ItemModel.find_by_name(name)
         if item:
