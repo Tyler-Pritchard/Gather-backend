@@ -31,6 +31,14 @@ api = Api(app)
 # TODO: https://blog.tecladocode.com/learn-python-advanced-configuration-of-flask-jwt/
 jwt = JWTManager(app)
 
+
+@jwt.user_claims_loader
+def add_claims_to_jwt(identity):
+    if identity == 1:  # TODO: set hard-coding to config file or userdb
+        return{'is_admin': True}
+    return {'is_admin': False}
+
+
 api.add_resource(Menu, '/menu/<string:name>')
 api.add_resource(MenusList, '/menus')
 api.add_resource(Item, '/item/<string:name>')
