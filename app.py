@@ -44,6 +44,14 @@ def add_claims_to_jwt(identity):
     return {'is_admin': False}
 
 
+@jwt.expired_token_loader
+def expired_token_callback():
+    return jsonify({
+        'description': 'The token has expired.',
+        'error': 'token_expired'
+    }), 401
+
+
 api.add_resource(Menu, '/menu/<string:name>')
 api.add_resource(MenusList, '/menus')
 api.add_resource(Item, '/item/<string:name>')
