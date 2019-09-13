@@ -68,6 +68,14 @@ def missing_token_callback(error):
     }), 401
 
 
+@jwt.needs_fresh_token_loader
+def token_not_fresh_callback():
+    return jsonify({
+        'description': 'The token is not fresh.',
+        'error': 'fresh_token_required'
+    }), 401
+
+
 api.add_resource(Menu, '/menu/<string:name>')
 api.add_resource(MenusList, '/menus')
 api.add_resource(Item, '/item/<string:name>')
