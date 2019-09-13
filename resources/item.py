@@ -1,5 +1,11 @@
 from flask_restful import Resource, reqparse
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import (
+    jwt_required,
+    get_jwt_claims,
+    jwt_optional,
+    get_jwt_identity,
+    fresh_jwt_required
+)
 from models.item import ItemModel
 from flask import request
 import stripe
@@ -10,6 +16,8 @@ ITEM_ALREADY_EXISTS = "An item with name '{}' already exists."
 INSERT_ITEM_ERROR = "An error occurred inserting the item."
 ITEM_DELETED = "Item deleted."
 ITEM_NOT_FOUND = "Item not found."
+UNAUTHORIZED_USER = "Admin privilege required."
+PLEASE_LOG_IN = "Log in for more info on this product."
 
 
 class Item(Resource):
@@ -38,16 +46,15 @@ class Item(Resource):
                         help=BLANK_ERROR
                         )
 
-    @classmethod
     @jwt_required
-    def get(cls, name: str):
+    def get(self, cls, name: str):
         item = ItemModel.find_by_name(name)
         if item:
             return item.json()
         return {'message': ITEM_NOT_FOUND}, 404
 
-    @classmethod
-    def post(cls, name: str):
+    @fresh_jwt_required
+    def post(self, cls, name: str):
         if ItemModel.find_by_name(name):
             return {'message': ITEM_ALREADY_EXISTS.format(name)}, 400
 
@@ -62,8 +69,12 @@ class Item(Resource):
 
         return item.json(), 201
 
-    @classmethod
-    def delete(cls, name: str):
+    @jwt_required
+    def delete(self, cls, name: str):
+        claims = get_jwt_claims()
+        if not claims['is_admin']:
+            return {'message': UNAUTHORIZED_USER}, 401
+
         item = ItemModel.find_by_name(name)
         if item:
             item.delete_from_db()
@@ -92,6 +103,13 @@ class Item(Resource):
 
 
 class ItemsList(Resource):
-    @classmethod
-    def get(cls):
-        return {'items': [item.json() for item in ItemModel.query.all()]}
+    @jwt_optional
+    def get(self):
+        user_id = get_jwt_identity()
+        items = [item.json() for item in ItemModel.find_all()]
+        if user_id:
+            return {'items': items}, 200
+        return {
+            'items': [item['name'] for item in items],
+            'message': PLEASE_LOG_IN
+        }, 200
