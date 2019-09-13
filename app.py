@@ -12,6 +12,7 @@ from resources.user import (
 )
 from resources.item import Item, ItemsList
 from resources.menu import Menu, MenusList
+from blacklist import BLACKLIST
 from seeds.menu import menu
 from models.menu import MenuModel
 from seeds.item import item
@@ -28,6 +29,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     'DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
+app.config['JWT_BLACKLIST_ENABLED'] = True
+app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access', 'refresh']
 # TODO: .env/.ini file for passwords. app.config['JWT_SECRET_KEY']
 app.secret_key = 'tyler'
 api = Api(app)
@@ -42,6 +45,11 @@ def add_claims_to_jwt(identity):
     if identity == 1:  # TODO: set hard-coding to config file or userdb
         return{'is_admin': True}
     return {'is_admin': False}
+
+
+@jwt.token_in_blacklist_loader
+def check_if_token_in_blacklist(decrypted_token):
+    return decrypted_token['identity'] in BLACKLIST
 
 
 @jwt.expired_token_loader
