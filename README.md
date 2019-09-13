@@ -21,6 +21,7 @@ You'll need to install:
     -Python (Minimum )
     -Flask
     -Flask-JWT
+    -Flask-JWT-Extended
     -Flask-RESTful
     -Flask-SQLAlchemy
     -flask-cors
