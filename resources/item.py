@@ -10,6 +10,7 @@ ITEM_ALREADY_EXISTS = "An item with name '{}' already exists."
 INSERT_ITEM_ERROR = "An error occurred inserting the item."
 ITEM_DELETED = "Item deleted."
 ITEM_NOT_FOUND = "Item not found."
+UNAUTHORIZED_USER = "Admin privilege required."
 
 
 class Item(Resource):
@@ -62,8 +63,12 @@ class Item(Resource):
 
         return item.json(), 201
 
-    @classmethod
+    @jwt_required
     def delete(cls, name: str):
+        claims = get_jwt_claims()
+        if not claims['is_admin']:
+            return {'message': UNAUTHORIZED_USER}, 401
+
         item = ItemModel.find_by_name(name)
         if item:
             item.delete_from_db()
