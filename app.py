@@ -52,6 +52,14 @@ def expired_token_callback():
     }), 401
 
 
+@jwt.invalid_token_loader
+def invalid_token_callback(error):
+    return jsonify({
+        'description': 'Signature verification failed.',
+        'error': 'invalid_token'
+    }), 401
+
+
 api.add_resource(Menu, '/menu/<string:name>')
 api.add_resource(MenusList, '/menus')
 api.add_resource(Item, '/item/<string:name>')
