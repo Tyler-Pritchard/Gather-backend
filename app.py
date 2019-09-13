@@ -76,6 +76,14 @@ def token_not_fresh_callback():
     }), 401
 
 
+@jwt.revoked_token_loader
+def revoked_token_callback():
+    return jsonify({
+        'description': 'The token has been revoked.',
+        'error': 'token_revoked'
+    }), 401
+
+
 api.add_resource(Menu, '/menu/<string:name>')
 api.add_resource(MenusList, '/menus')
 api.add_resource(Item, '/item/<string:name>')
