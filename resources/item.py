@@ -1,5 +1,10 @@
 from flask_restful import Resource, reqparse
-from flask_jwt_extended import jwt_required, get_jwt_claims
+from flask_jwt_extended import (
+    jwt_required,
+    get_jwt_claims,
+    jwt_optional,
+    get_jwt_identity
+)
 from models.item import ItemModel
 from flask import request
 import stripe
@@ -11,6 +16,7 @@ INSERT_ITEM_ERROR = "An error occurred inserting the item."
 ITEM_DELETED = "Item deleted."
 ITEM_NOT_FOUND = "Item not found."
 UNAUTHORIZED_USER = "Admin privilege required."
+PLEASE_LOG_IN = "Log in for more info on this product."
 
 
 class Item(Resource):
@@ -97,6 +103,13 @@ class Item(Resource):
 
 
 class ItemsList(Resource):
-    @classmethod
-    def get(cls):
-        return {'items': [item.json() for item in ItemModel.query.all()]}
+    @jwt_optional
+    def get(cls, name: str):
+        user_id = get_jwt_identity()
+        items = [item.json() for item in ItemModel.find_all()]
+        if user_id:
+            return {'items': items}, 200
+        return {
+            'items': [item['name'] for item in items],
+            'message': PLEASE_LOG_IN
+        }, 200
