@@ -70,7 +70,7 @@ class Item(Resource):
         return item.json(), 201
 
     @jwt_required
-    def delete(cls, name: str):
+    def delete(self):
         claims = get_jwt_claims()
         if not claims['is_admin']:
             return {'message': UNAUTHORIZED_USER}, 401
@@ -104,7 +104,7 @@ class Item(Resource):
 
 class ItemsList(Resource):
     @jwt_optional
-    def get(cls, name: str):
+    def get(self):
         user_id = get_jwt_identity()
         items = [item.json() for item in ItemModel.find_all()]
         if user_id:
