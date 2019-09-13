@@ -60,6 +60,14 @@ def invalid_token_callback(error):
     }), 401
 
 
+@jwt.unauthorized_loader
+def missing_token_callback(error):
+    return jsonify({
+        'description': 'Request does not contain an access token.',
+        'error': 'authorization_required'
+    }), 401
+
+
 api.add_resource(Menu, '/menu/<string:name>')
 api.add_resource(MenusList, '/menus')
 api.add_resource(Item, '/item/<string:name>')
