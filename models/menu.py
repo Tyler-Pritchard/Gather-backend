@@ -1,7 +1,6 @@
 from typing import Dict, List, Union
 
 from db import db
-
 from models.item import menu_item
 
 menus_menu = Dict[str, Union[str, List[menu_item]]]
@@ -17,7 +16,7 @@ class MenuModel(db.Model):
     def __init__(self, name: str):
         self.name = name
 
-    def json(self) -> menus_menu:
+    def json(self, name: str) -> menus_menu:
         return {'name': self.name,
                 'items': [menu.json() for menu in self.items]}
 
