@@ -1,4 +1,5 @@
 from typing import Dict, Union
+
 from db import db
 
 UserJSON = Dict[str, Union[int, str]]
