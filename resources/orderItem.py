@@ -15,21 +15,9 @@ class OrderItem(Resource):
 
     parser = reqparse.RequestParser()
 
-    parser.add_argument('name',
-                        type=str,
-                        required=True,
-                        help=BLANK_ERROR
-                        )
-    parser.add_argument('price',
-                        type=int,
-                        required=True,
-                        help=BLANK_ERROR
-                        )
-    parser.add_argument('quantity',
-                        type=int,
-                        required=True,
-                        help=QUANTITY_ERROR
-                        )
+    parser.add_argument("name", type=str, required=True, help=BLANK_ERROR)
+    parser.add_argument("price", type=int, required=True, help=BLANK_ERROR)
+    parser.add_argument("quantity", type=int, required=True, help=QUANTITY_ERROR)
 
     @classmethod
     @jwt_required()
@@ -38,20 +26,20 @@ class OrderItem(Resource):
         orderItem = OrderItemModel.find_by_name(name)
         if orderItem:
             return orderItem.json()
-        return {'message': ITEM_NOT_FOUND}, 404
+        return {"message": ITEM_NOT_FOUND}, 404
 
     @classmethod
     def post(cls, name: str, price: float):
         if OrderItemModel.find_by_name(name):
             # switch to quantity ++
-            return {'message': ITEM_ALREADY_EXISTS.format(name)}, 400
+            return {"message": ITEM_ALREADY_EXISTS.format(name)}, 400
 
         data = OrderItem.parser.parse_args()
         orderItem = OrderItemModel(name, price)
         try:
             orderItem.save_to_db()
         except:
-            return {'message': CREATE_ITEM_ERROR}, 500
+            return {"message": CREATE_ITEM_ERROR}, 500
 
         return orderItem.json(), 201
 
@@ -60,8 +48,8 @@ class OrderItem(Resource):
         orderItem = OrderItemModel.find_by_name(name)
         if orderItem:
             orderItem.delete_from_db()
-            return {'message': ORDERITEM_DELETED}
-        return {'message': ORDERITEM_NOT_FOUND}, 404
+            return {"message": ORDERITEM_DELETED}
+        return {"message": ORDERITEM_NOT_FOUND}, 404
 
     @classmethod
     def put(cls, name: str):
@@ -70,9 +58,9 @@ class OrderItem(Resource):
         orderItem = OrderItemModel.find_by_name(name)
 
         if orderItem:
-            orderItem.name = data['name']
-            orderItem.price = data['price']
-            orderItem.quantity = data['quantity']
+            orderItem.name = data["name"]
+            orderItem.price = data["price"]
+            orderItem.quantity = data["quantity"]
 
         else:
             orderItem = OrderItemModel(name, **data)
@@ -85,4 +73,6 @@ class OrderItem(Resource):
 class OrderItemsList(Resource):
     @classmethod
     def get(cls):
-        return {'orderItems': [OrderItem.json() for OrderItem in OrderItemModel.query.all()]}
+        return {
+            "orderItems": [OrderItem.json() for OrderItem in OrderItemModel.query.all()]
+        }

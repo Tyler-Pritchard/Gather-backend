@@ -4,11 +4,10 @@ from db import db
 
 
 class OrderItemModel(db.Model):
-    __tablename__ = 'orderItems'
+    __tablename__ = "orderItems"
 
     id = db.Column(db.Integer, primary_key=True)
-    item_id = db.Column(db.Integer, db.ForeignKey(
-        'items.id', ondelete="SET NULL"))
+    item_id = db.Column(db.Integer, db.ForeignKey("items.id", ondelete="SET NULL"))
     name = db.Column(db.String(80))
     price = db.Column(db.Integer)
     quantity = db.Column(db.Integer)
@@ -19,7 +18,12 @@ class OrderItemModel(db.Model):
         self.quantity = quantity
 
     def json(self) -> Dict:
-        return {'name': self.name, 'price': self.price, 'orderItems': [orderItem.json() for orderItem in self.orderItems], 'quantity': self.quantity}
+        return {
+            "name": self.name,
+            "price": self.price,
+            "orderItems": [orderItem.json() for orderItem in self.orderItems],
+            "quantity": self.quantity,
+        }
 
     # @classmethod
     # def find_all(cls) -> List["OrderItemModel"]:

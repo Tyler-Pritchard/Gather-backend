@@ -8,18 +8,17 @@ menus_menu = Dict[str, Union[str, List[menu_item]]]
 
 
 class MenuModel(db.Model):
-    __tablename__ = 'menus'
+    __tablename__ = "menus"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    items = db.relationship('ItemModel', lazy="dynamic")
+    items = db.relationship("ItemModel", lazy="dynamic")
 
     def __init__(self, name: str):
         self.name = name
 
     def json(self) -> menus_menu:
-        return {'name': self.name,
-                'items': [menu.json() for menu in self.items]}
+        return {"name": self.name, "items": [menu.json() for menu in self.items]}
 
     @classmethod
     def find_all(cls) -> List["MenuModel"]:

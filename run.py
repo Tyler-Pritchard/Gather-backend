@@ -6,6 +6,7 @@ from seeds.item import item
 from models.item import ItemModel
 from models.orderItem import OrderItemModel
 from flask import Flask
+
 # TODO: IMPORT ORDERNUMBER & MENUITEMS
 
 db.init_app(app)

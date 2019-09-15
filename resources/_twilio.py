@@ -9,8 +9,7 @@ auth_token = "********************"
 client = Client(account_sid, auth_token)
 
 message = client.messages.create(
-    to="+1520909",
-    from_="+15206399758",
-    body="Hello, Mansoor my name is Python!")
+    to="+1520909", from_="+15206399758", body="Hello, Mansoor my name is Python!"
+)
 
 print(message.sid)
