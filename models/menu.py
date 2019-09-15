@@ -16,14 +16,9 @@ class MenuModel(db.Model):
     def __init__(self, name: str):
         self.name = name
 
-<<<<<<< HEAD
-    def json(self) -> menus_menu:
-        return {"name": self.name, "items": [menu.json() for menu in self.items]}
-=======
     def json(self, name: str) -> menus_menu:
         return {'name': self.name,
                 'items': [menu.json() for menu in self.items]}
->>>>>>> 87f9a316bf146f28944e7edd847f83263c32f672
 
     @classmethod
     def find_all(cls) -> List["MenuModel"]:
