@@ -38,9 +38,10 @@ You'll need to install:
 
     pip3 install flask jsonify flask_restful flask_jwt flask_jwt_extended flask_cors flask_sqlalchemy stripe
     
-
+    
+from the command line in the folder's root directory
 ```
-python3 app.python from the command line in the folder's root directory
+python3 app.python
 ```
 
 ## Running the tests
