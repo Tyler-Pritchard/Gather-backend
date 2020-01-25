@@ -32,16 +32,15 @@ You'll need to install:
 
 ### Installing
 
-```
-pip install Flask
-```
+    python3 -m venv venv
+    
+    . venv/bin/activate
+
+    pip3 install flask jsonify flask_restful flask_jwt flask_jwt_extended flask_cors flask_sqlalchemy stripe
+    
 
 ```
-pip install stripe
-```
-
-```
-python app.python from the command line in the folder's root directory
+python3 app.python from the command line in the folder's root directory
 ```
 
 ## Running the tests
@@ -64,17 +63,6 @@ Interfacing with Stripe for payment authorization
 Successful Stripe tests
 <img src ="https://s3.amazonaws.com/gather-screenshots/stripe_acct.png" alt="conf" height=400px width=600px />
 
-<!-- ### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-``` -->
-<!--
-## Deployment
-
-Add additional notes about how to deploy this on a live system -->
 
 ## Built With
 
@@ -88,19 +76,9 @@ Add additional notes about how to deploy this on a live system -->
 - [Stripe](https://stripe.com/) - Online payment processing(\*)
 - [Twilio](https://www.twilio.com/) - Communications API(\*)
 
-<!-- ## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). -->
-
 ## Author
 
 - **Tyler Pritchard** - _Initial work_ - [website](https://tylerrobertpritchard.com)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 <!-- ## License
 
